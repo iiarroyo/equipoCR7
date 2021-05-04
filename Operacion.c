@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -21,4 +22,4 @@ int op3 = multi(num1,num2);
 printf("%i",op3);
 
 return 0;
-}
+
