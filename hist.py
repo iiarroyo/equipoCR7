@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-
+#comentario de prueba
 
 image = cv2.imread("noki.jpg",cv2.IMREAD_GRAYSCALE)
 h = [0]*256
