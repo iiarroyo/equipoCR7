@@ -15,21 +15,28 @@ def equalize(image,verbose=False):
         h = [0]*256
         for value in range(256):
             h[value] = (image==value).sum()
-        plt.bar(range(256),h)
-        plt.title("Histograma original")
-        plt.show()
+        
         #calcula histograma de img equalizada
         h_eq = [0]*256
         for value in range(256):
             h_eq[value] = (image_eq==value).sum()
-        plt.bar(range(256),h_eq)
-        plt.title("Histograma equalizado")
-        plt.show()
-
+        
+        #impresion de comparacion de imagen
         res_img = np.hstack((image,image_eq))
         plt.imshow(res_img,cmap='gray')
         plt.title("Imagen original vs equalizada")
         plt.show()
+        
+        #impresion histograma original
+        plt.bar(range(256),h)
+        plt.title("Histograma original")
+        plt.show()
+
+        #impresion histograma equalizado
+        plt.bar(range(256),h_eq)
+        plt.title("Histograma equalizado")
+        plt.show()
+        
 
     return image_eq
 
