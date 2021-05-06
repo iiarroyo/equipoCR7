@@ -2,17 +2,37 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
+def equalize(image,verbose=False):
+    '''
+    Recibe imagen (numpy.ndarray) y bandera verbose
+    Regresa imagen equalizada
+        Puede imprimir comparacion de 
+        histograma e imagen
+    '''
+    image_eq = cv2.equalizeHist(image)
+    if verbose:
+        # calcula histograma de img
+        h = [0]*256
+        for value in range(256):
+            h[value] = (image==value).sum()
+        plt.bar(range(256),h)
+        plt.title("Histograma original")
+        plt.show()
+        #calcula histograma de img equalizada
+        h_eq = [0]*256
+        for value in range(256):
+            h_eq[value] = (image_eq==value).sum()
+        plt.bar(range(256),h_eq)
+        plt.title("Histograma equalizado")
+        plt.show()
 
-image = cv2.imread("persona.jpg",cv2.IMREAD_GRAYSCALE)
-h = [0]*256
-for value in range(256):
-    h[value] = (image==value).sum()
+        res_img = np.hstack((image,image_eq))
+        plt.imshow(res_img,cmap='gray')
+        plt.title("Imagen original vs equalizada")
+        plt.show()
 
-plt.bar(range(256),h)
-plt.show()
+    return image_eq
 
-equ = cv2.equalizeHist(image)
-res = np.hstack((image,equ)) #stacking images side-by-side
-plt.imshow(res,cmap='gray')
-plt.title("imagen eq")
-plt.show()
+if __name__ == "__main__" :
+    image = cv2.imread("persona.jpg",cv2.IMREAD_GRAYSCALE)
+    res = equalize(image,verbose=True)
