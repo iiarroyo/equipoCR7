@@ -3,9 +3,10 @@
 Pre procesamiento de imagen para filtro de "celular" con 2 fases (equalizacion de histograma y convolucion con filtro gausiano) e interfaz gráfica
 
 >*Integrantes*:
+>
 >- Israel Arroyo A01706190
->- Miguel Luna
->- Kevin Joan Delgado
+>- Miguel Luna A01706424
+>- Kevin Joan Delgado A01706328
 
 ## Equalizacion de histograma
 
@@ -16,7 +17,19 @@ Pues al separar la distribución de valores en el histograma, se mejora el contr
 
 ## Filtro de blur
 
+Con esta fase se aplica la convloucion con el filtro de blur de Gauss
+
 ## Interfaz
+
+La interfaz diseñada permite observar los cambios en una misma imagen.
+
+En la caja de texto se ingresa el nombre del archivo a modificar. Después, se presiona el botón de comenzar para cargar la imagen e imprimirla en pantalla.
+
+Los botones de ecualizar y aplicar filtro de Gauss hacen lo discutido anteriormente.
+
+Al final, se puede aplicar un estilo diferente, después de haber equalizado o aplicado el filtro. Con esto, se cambian aspectos de color de la imagen. Se pueden escoger 3 estilos diferentes
+
+![Imagen 1](/images/interfaz.png)
 
 ## Referencias
 Mordvintsev, A. & Abid K. (2013). Histograms - 2: Histogram Equalization. 6 de mayo, 2021, de OpenCV-Python Tutorials Sitio web: <https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_histograms/py_histogram_equalization/py_histogram_equalization.html>
