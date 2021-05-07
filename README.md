@@ -3,9 +3,9 @@
 Pre procesamiento de imagen para filtro de "celular" con 2 fases (equalizacion de histograma y convolucion con filtro gausiano) e interfaz gráfica
 
 >*Integrantes*:
->Israel Arroyo A01706190
->Miguel Luna
->Kevin Joan Delgado
+>- Israel Arroyo A01706190
+>- Miguel Luna
+>- Kevin Joan Delgado
 
 ## Equalizacion de histograma
 
