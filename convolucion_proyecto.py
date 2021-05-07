@@ -1,5 +1,5 @@
 # convolucion_persona.py
-# Versión 1
+# Versión 2
 # Herramientas computacionales: El arte de la programación
 
 import numpy as np
@@ -22,11 +22,11 @@ def convolucion(imagen, kernel):
     """Aplicar la convolución según la imagen, al ser de 3 canales o dimensiones, se cambiaran a dos canales"""
     
     if len(imagen.shape) == 3:
-        print("Found 3 Channels : {}".format(imagen.shape)) #Se econtraron 3 canales
+        print("Found 3 Channels : {}".format(imagen.shape)) 
         imagen = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
-        print("Converted to Gray Channel. Size : {}".format(imagen.shape)) #Convertido a dos dimensiones/escala de grises
+        print("Converted to Gray Channel. Size : {}".format(imagen.shape)) 
     else:
-        print("Imagen Shape : {}".format(imagen.shape)) #Tamaño de la imagen
+        print("Imagen Shape : {}".format(imagen.shape))
  
     imagen_row, imagen_col = imagen.shape #asignar el alto y ancho de la imagen
     kernel_row, kernel_col = kernel.shape #asignar el alto y ancho del filtro
@@ -41,9 +41,8 @@ def convolucion(imagen, kernel):
  
     for row in range(output_y_int): #recorrer las filas de la imagen
         for col in range(output_x_int): #recorrer las columnas de la imagen
-                output[row,col] = suma_matrices( 
-                                    imagen[row:row + kernel_row, 
-                                    col:col + kernel_col],kernel) #relizar la suma entre las filas de la matriz con la del kernel y lo mismo con las columnas
+            output[row,col] = suma_matrices(imagen[row:row + kernel_row,
+                                                   col:col + kernel_col],kernel) #relizar la suma entre las filas de la matriz con la del kernel y lo mismo con las columnas
  
     print("Output Imagen size : {}".format(output.shape)) #Tamaño de la imagen final
  
@@ -65,7 +64,7 @@ if __name__ == '__main__':
                       [-1,0,1]])
     
     filtro2 = np.array([
-[0,0,0,5,0,0,0],
+                         [0,0,0,5,0,0,0],
                          [0,5,18,32,18,5,0],
                          [0,18,64,100,64,18,0],
                          [5,32,100,100,100,32,5],
