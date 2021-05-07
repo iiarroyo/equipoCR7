@@ -4,9 +4,31 @@ import cv2
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
+from hist import equalize
+from convolucion_proyecto import convolucion
 
+imageLoad = []
+            
+filtro = np.array([[-1,0,1],
+                      [-2,0,2],
+                      [-1,0,1]])
+    
+filtro2 = np.array([[0,0,0,5,0,0,0],
+                         [0,5,18,32,18,5,0],
+                         [0,18,64,100,64,18,0],
+                         [5,32,100,100,100,32,5],
+                         [0,18,64,100,64,18,0],
+                         [0,5,18,32,18,5,0],
+                         [0,0,0,5,0,0,0]])
+     
+filtro3 = np.array([[-1,-1,-1],
+                        [-1,8,-1],
+                        [-1,-1,-1]])
+ 
+ 
 #Funcion que activa el boton y muestra la imagen a blanco y negro
 def textoCaja(textoEntrada):
+    global imageLoad
     imageLoad = cv2.imread(str(textoEntrada.get()))
    
     if len(imageLoad.shape) == 3:
@@ -23,6 +45,28 @@ def textoCaja(textoEntrada):
     canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
     canvas.draw_idle()      
 
+def ecualizar():
+    global imageLoad
+    imageLoad = equalize(imageLoad)
+    fig = plt.figure()
+    ax = fig.add_subplot(111)  
+    ax.axis('off')
+    ax.imshow(imageLoad, cmap='gray') 
+    canvas = FigureCanvasTkAgg(fig, ventana) 
+    canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
+    canvas.draw_idle()
+    
+def conv():
+    global imageLoad
+    global filtro2
+    fig = plt.figure()
+    ax = fig.add_subplot(111)  
+    ax.axis('off')
+    ax.imshow(convolucion(imageLoad, filtro2), cmap='gray') 
+    canvas = FigureCanvasTkAgg(fig, ventana) 
+    canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
+    canvas.draw_idle()
+    
 #Creacion de la ventana de Tkinter
 ventana = tkinter.Tk()
 ventana.geometry("1010x800")
@@ -40,21 +84,22 @@ textoEntrada = tkinter.Entry(ventana,
 textoEntrada.grid(pady = 20, row = 1, column = 0, columnspan = 3)
 
 botonEntrada = tkinter.Button(ventana,
-                              text = "Comenzar",
+                              text = "1. Comenzar",
                               padx = 25, pady = 15,
                               command = lambda: textoCaja(textoEntrada))
 botonEntrada.grid(row = 3, column = 0)
 
 botonEcualizacion = tkinter.Button(ventana,
-                                   text = "Ecualizar",
+                                   text = "2. Ecualizar",
                                    padx = 25, pady = 15,
+                                   command = lambda: ecualizar()
                                    )
 botonEcualizacion.grid(row = 3, column = 1)
 
 botonFiltro = tkinter.Button(ventana,
-                             text = "Aplicar filtro \n(Gaussiano)",
+                             text = "3. Aplicar filtro \n(Gaussiano)",
                              padx = 25, pady = 15,
-                             )
+                             command = conv)
 botonFiltro.grid(row = 3, column = 2)
 
 
