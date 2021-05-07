@@ -49,10 +49,10 @@ def convolucion(imagen, kernel):
  
     return output
     
-def print_imagen(imagen,titulo):
+def print_imagen(imagen,titulo,estilo):
     """Función que imprime la imagen, cmap permite obtener una gran cantidad de matices"""
     
-    plt.imshow(imagen, cmap='gray')
+    plt.imshow(imagen, cmap = estilo)
     plt.title(titulo)
     plt.show()
 
@@ -78,7 +78,7 @@ if __name__ == '__main__':
                         [-1,-1,-1]])
     
 
-    print_imagen(convolucion(imagen,filtro),"Sobel Edge Filter (persona)")
-    print_imagen(convolucion(imagen,filtro2),"Gaussian Blur Filter (persona)")
-    print_imagen(convolucion(imagen,filtro3),"Laplacian Operator Filter (persona)")
+    print_imagen(convolucion(imagen,filtro),"Sobel Edge Filter (Winter)", "winter")
+    print_imagen(convolucion(imagen,filtro2),"Gaussian Blur Filter (Hot)", "hot")
+    print_imagen(convolucion(imagen,filtro3),"Laplacian Operator Filter (Cool)", "cool")
     
