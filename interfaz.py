@@ -7,13 +7,9 @@ from matplotlib.backends.backend_tkagg import (
 from hist import equalize
 from convolucion_proyecto import convolucion
 
-imageLoad = []
-            
-filtro = np.array([[-1,0,1],
-                      [-2,0,2],
-                      [-1,0,1]])
-    
-filtro2 = np.array([[0,0,0,5,0,0,0],
+#Variables globales 
+imageLoad = []            
+filtro = np.array([[0,0,0,5,0,0,0],
                          [0,5,18,32,18,5,0],
                          [0,18,64,100,64,18,0],
                          [5,32,100,100,100,32,5],
@@ -21,52 +17,85 @@ filtro2 = np.array([[0,0,0,5,0,0,0],
                          [0,5,18,32,18,5,0],
                          [0,0,0,5,0,0,0]])
      
-filtro3 = np.array([[-1,-1,-1],
-                        [-1,8,-1],
-                        [-1,-1,-1]])
- 
- 
+estilo = 'gray'
+actual = " "
+output = []
+
 #Funcion que activa el boton y muestra la imagen a blanco y negro
 def textoCaja(textoEntrada):
     global imageLoad
+    global estilo
+    global actual
+    
+    actual = "original"
     imageLoad = cv2.imread(str(textoEntrada.get()))
    
     if len(imageLoad.shape) == 3:
-        print("Found 3 Channels : {}".format(imageLoad.shape))
         imageLoad = cv2.cvtColor(imageLoad, cv2.COLOR_BGR2GRAY)
-    else:
-        print("Image Shape : {}".format(imageLoad.shape))
     
     fig = plt.figure()
     ax = fig.add_subplot(111)  
     ax.axis('off')
-    ax.imshow(imageLoad,cmap='gray') 
+    ax.imshow(imageLoad,cmap=estilo) 
     canvas = FigureCanvasTkAgg(fig, ventana) 
     canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
     canvas.draw_idle()      
 
+#Funcion para ecualizar una
 def ecualizar():
     global imageLoad
+    global estilo
+    global actual
+    
+    actual = "ecualizada"
     imageLoad = equalize(imageLoad)
     fig = plt.figure()
     ax = fig.add_subplot(111)  
     ax.axis('off')
-    ax.imshow(imageLoad, cmap='gray') 
+    ax.imshow(imageLoad, cmap=estilo) 
     canvas = FigureCanvasTkAgg(fig, ventana) 
     canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
     canvas.draw_idle()
-    
+
+#Funcion para hacer la convolucion de una imagen con un filtro gaussiano
 def conv():
     global imageLoad
-    global filtro2
+    global filtro
+    global estilo
+    global actual
+    global output
+    
+    output = convolucion(imageLoad, filtro)
+    actual = "conv"
     fig = plt.figure()
     ax = fig.add_subplot(111)  
     ax.axis('off')
-    ax.imshow(convolucion(imageLoad, filtro2), cmap='gray') 
+    ax.imshow(output, cmap=estilo) 
     canvas = FigureCanvasTkAgg(fig, ventana) 
     canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
     canvas.draw_idle()
+
+#Funcion para cambiar el etilo de la imagen
+def cambiarEstilo(style):
+    global estilo
+    global actual
+    global output
     
+    estilo = style
+    
+    if(actual == "original"):
+        textoCaja(textoEntrada)
+    elif(actual == "ecualizada"):
+        ecualizar()
+    elif(actual == "conv"):
+        fig = plt.figure()
+        ax = fig.add_subplot(111)  
+        ax.axis('off')
+        ax.imshow(output, cmap=estilo) 
+        canvas = FigureCanvasTkAgg(fig, ventana) 
+        canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
+        canvas.draw_idle()    
+           
 #Creacion de la ventana de Tkinter
 ventana = tkinter.Tk()
 ventana.geometry("1010x800")
@@ -92,7 +121,7 @@ botonEntrada.grid(row = 3, column = 0)
 botonEcualizacion = tkinter.Button(ventana,
                                    text = "2. Ecualizar",
                                    padx = 25, pady = 15,
-                                   command = lambda: ecualizar()
+                                   command = ecualizar
                                    )
 botonEcualizacion.grid(row = 3, column = 1)
 
@@ -102,6 +131,24 @@ botonFiltro = tkinter.Button(ventana,
                              command = conv)
 botonFiltro.grid(row = 3, column = 2)
 
+
+botonEstilo1 = tkinter.Button(ventana,
+                             text = "4. Aplicar estilo 'winter'",
+                             padx = 25, pady = 15,
+                             command = lambda: cambiarEstilo('winter'))
+botonEstilo1.grid(row = 6, column = 0)
+
+botonEstilo2 = tkinter.Button(ventana,
+                             text = "5. Aplicar estilo 'hot'",
+                             padx = 25, pady = 15,
+                             command = lambda: cambiarEstilo('hot'))
+botonEstilo2.grid(row = 6, column = 1)
+
+botonEstilo3 = tkinter.Button(ventana,
+                             text = "6. Aplicar estilo 'cool'",
+                             padx = 25, pady = 15,
+                             command = lambda: cambiarEstilo('cool'))
+botonEstilo3.grid(row = 6, column = 2)
 
 ventana.mainloop()
 
