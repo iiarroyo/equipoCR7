@@ -20,29 +20,43 @@ def textoCaja(textoEntrada):
     ax.axis('off')
     ax.imshow(imageLoad,cmap='gray') 
     canvas = FigureCanvasTkAgg(fig, ventana) 
-    canvas.get_tk_widget().grid(row=4, column=0)
+    canvas.get_tk_widget().grid(row=5, column=0, columnspan = 3)
     canvas.draw_idle()      
 
 #Creacion de la ventana de Tkinter
 ventana = tkinter.Tk()
-ventana.geometry("800x800")
+ventana.geometry("1010x800")
 
 #Definicion de componentes de la interfaz como titulo, botones y carteles
 titulo = tkinter.Label(ventana,
-                       text = "Proyecto",
-                       font = "Roboto 30",
+                       text = "Proyecto de Herramientas computacionales: el arte de la programación ",
+                       font = "Helvetica 20",
                        justify = "center")
-titulo.grid(row = 0, column = 0)
+titulo.grid(pady = 20, row = 0, column = 0, columnspan = 3)
 
 textoEntrada = tkinter.Entry(ventana,
-                             font = "Helvetica 50")
-textoEntrada.grid(row = 1, column = 0)
+                             font = ("Helvetica 20"))
+
+textoEntrada.grid(pady = 20, row = 1, column = 0, columnspan = 3)
 
 botonEntrada = tkinter.Button(ventana,
                               text = "Comenzar",
-                              padx = 40, pady = 30,
+                              padx = 25, pady = 15,
                               command = lambda: textoCaja(textoEntrada))
-botonEntrada.grid(row = 2, column = 0)
+botonEntrada.grid(row = 3, column = 0)
+
+botonEcualizacion = tkinter.Button(ventana,
+                                   text = "Ecualizar",
+                                   padx = 25, pady = 15,
+                                   )
+botonEcualizacion.grid(row = 3, column = 1)
+
+botonFiltro = tkinter.Button(ventana,
+                             text = "Aplicar filtro \n(Gaussiano)",
+                             padx = 25, pady = 15,
+                             )
+botonFiltro.grid(row = 3, column = 2)
+
 
 ventana.mainloop()
 
