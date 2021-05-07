@@ -20,6 +20,7 @@ def suma_matrices(matriz,kernel):
  
 def convolucion(imagen, kernel):
     """Aplicar la convolución según la imagen, al ser de 3 canales o dimensiones, se cambiaran a dos canales"""
+<<<<<<< HEAD
     
     if len(imagen.shape) == 3:
         print("Found 3 Channels : {}".format(imagen.shape)) 
@@ -27,6 +28,8 @@ def convolucion(imagen, kernel):
         print("Converted to Gray Channel. Size : {}".format(imagen.shape)) 
     else:
         print("Imagen Shape : {}".format(imagen.shape))
+=======
+>>>>>>> 3d9611ec449c4095975818fb681ee8f1b9a52e4c
  
     imagen_row, imagen_col = imagen.shape #asignar el alto y ancho de la imagen
     kernel_row, kernel_col = kernel.shape #asignar el alto y ancho del filtro
