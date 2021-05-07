@@ -64,6 +64,21 @@ if __name__ == '__main__':
                       [-2,0,2],
                       [-1,0,1]])
     
+    filtro2 = np.array([
+[0,0,0,5,0,0,0],
+                         [0,5,18,32,18,5,0],
+                         [0,18,64,100,64,18,0],
+                         [5,32,100,100,100,32,5],
+                         [0,18,64,100,64,18,0],
+                         [0,5,18,32,18,5,0],
+                         [0,0,0,5,0,0,0]])
+    
+    filtro3 = np.array([[-1,-1,-1],
+                        [-1,8,-1],
+                        [-1,-1,-1]])
+    
 
     print_imagen(convolucion(imagen,filtro),"Sobel Edge Filter (persona)")
+    print_imagen(convolucion(imagen,filtro2),"Gaussian Blur Filter (persona)")
+    print_imagen(convolucion(imagen,filtro3),"Laplacian Operator Filter (persona)")
     
