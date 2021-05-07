@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def equalize(image,verbose=False):
     '''
     Recibe imagen (numpy.ndarray) y bandera verbose
-    Regresa imagen equalizada
+    Regresa imagen equalizada (numpy.ndarray)
         Puede imprimir comparacion de 
         histograma e imagen
     '''
