@@ -8,6 +8,18 @@ Pre procesamiento de imagen para filtro de "celular" con 2 fases (equalizacion d
 >- Miguel Luna A01706424
 >- Kevin Joan Delgado A01706328
 
+## Correr proyecto
+
+Para ejecutar el programa se necesitan las siguientes librerias de python:
+
+- tkinter
+- numpy
+- opencv-python
+- matplotlib
+
+El programa principal es *interfaz.py*. Cuando este se corre se utilizan las funciones de convolución y ecualizacion para lanzar la interfaz grafica de tkinter.
+Los archivos *convloucion_proyecto.py* y *hist.py* se pueden correr por separado para probar casos de prueba.
+
 ## Equalizacion de histograma
 
 Con esta primera fase se mejora la calidad de detalles de una fotografía. Si se corre el archivo *hist.py*, se observan los siguientes resultados:
@@ -17,7 +29,8 @@ Pues al separar la distribución de valores en el histograma, se mejora el contr
 
 ## Filtro de blur
 
-Con esta fase se aplica la convloucion con el filtro de blur de Gauss
+Con esta fase se aplica la convloucion con el filtro de blur de Gauss. Se declararon varios filtros para casos de prueba, además del blur de Gauss.
+Para añadir estilos, la funcion *convolucion* recibe el nombre del *cmap* deseado, para lograr algún efecto deseado.
 
 ## Interfaz
 
