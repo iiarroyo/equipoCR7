@@ -49,6 +49,13 @@ def convolucion(imagen, kernel):
  
     return output
     
+def print_imagen(imagen,titulo):
+    """Función que imprime la imagen, cmap permite obtener una gran cantidad de matices"""
+    
+    plt.imshow(imagen, cmap='gray')
+    plt.title(titulo)
+    plt.show()
+
 
 if __name__ == '__main__':
     imagen = cv2.imread("persona.jpg")
@@ -58,8 +65,5 @@ if __name__ == '__main__':
                       [-1,0,1]])
     
 
-    resultado = convolucion(imagen,filtro)
+    print_imagen(convolucion(imagen,filtro),"Sobel Edge Filter (persona)")
     
-    plt.imshow(resultado, cmap='gray')
-    plt.title("Sobel Edge Filter (persona)")
-    plt.show()
